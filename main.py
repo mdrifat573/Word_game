@@ -60,3 +60,47 @@ print()
 print(f"You have {guesses_remaining} guesses remaining to identify the password out of {word_count} words.")
 print(f"It has {len(password)}-letter words.")
 input("Press Enter to begin!")
+
+Win = False
+
+while guesses_remaining > 0 and not Win:
+    print()
+    print("The password is one of these words:")
+    for number, word in enumerate(word_list, start=1):
+        print(f"{number}) {word}")
+
+    print()
+    print(f"Guesses remaining: {guesses_remaining}")
+
+    # Asking the user about the number.
+    while True:
+        choice_text = input(f"Guess (enter 1-{len(word_list)}): ").strip()
+
+        if choice_text.isdigit():
+            choice_number = int(choice_text)
+            if 1 <= choice_number <= len(word_list):
+                break
+
+        print("Invalid choice! Enter one of the numbers shown.")
+
+    selected_word = word_list.pop(choice_number - 1)
+    guesses_remaining -= 1
+    print()
+    print(selected_word)
+
+    if selected_word == password:
+        print("Password correct.")
+        Win = True
+    else:
+        matching_letters = compare_words(selected_word, password)
+        print("Password incorrect.")
+        print(f"{matching_letters}/{len(password)} correct.")
+
+print()
+if Win:
+    if guesses_remaining == starting_guesses - 1:
+        print("Lucky guess!")
+    print("You win!")
+else:
+    print("You lose!")
+    print(f"The password was {password}.")
