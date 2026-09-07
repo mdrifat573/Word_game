@@ -33,3 +33,30 @@ while True:
 
     print("Invalid choice! Enter E, M or H.")
     print()
+
+# Set up the game based on dificulty
+if difficulty == "E":
+    source_list = easy_words
+    word_count = 7
+    guesses_remaining = 5
+    difficulty_name = "Easy"
+elif difficulty == "M":
+    source_list = medium_words
+    word_count = 8
+    guesses_remaining = 4
+    difficulty_name = "Medium"
+else:
+    source_list = hard_words
+    word_count = 9
+    guesses_remaining = 4
+    difficulty_name = "Hard"
+
+word_list = random.sample(source_list, word_count)
+password = random.choice(word_list)
+starting_guesses = guesses_remaining
+
+print(f"{difficulty_name} difficulty selected!")
+print()
+print(f"You have {guesses_remaining} guesses remaining to identify the password out of {word_count} words.")
+print(f"It has {len(password)}-letter words.")
+input("Press Enter to begin!")
